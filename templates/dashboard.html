@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        👋 Welcome, {{ user.username }}!
+    </h2>
+
+    <div class="row g-4">
+
+        <!-- Progress -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow p-4 h-100">
+
+                <h4>📚 Learning Progress</h4>
+
+                <hr>
+
+                <h5>
+                    {{ completed }} / {{ total_lessons }}
+                    Lessons Completed
+                </h5>
+
+                <div class="progress mt-3" style="height:25px;">
+
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        style="width: {{ progress_percentage }}%;">
+
+                        {{ progress_percentage }}%
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- XP -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow text-center p-4 h-100">
+
+                <h1>⭐</h1>
+
+                <h4>XP</h4>
+
+                <h2>{{ user.points }}</h2>
+
+            </div>
+
+        </div>
+
+        <!-- Streak -->
+
+        <div class="col-md-3">
+
+            <div class="card shadow text-center p-4 h-100">
+
+    <h1>🔥</h1>
+
+    <h4>Current Streak</h4>
+
+    <h2>{{ user.current_streak }} Days</h2>
+
+    <hr>
+
+    <small class="text-muted">
+
+        Best: {{ user.highest_streak }} Days
+
+    </small>
+
+</div>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4 mt-3">
+
+    <!-- Continue Learning -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow p-4 h-100">
+
+            <h4>📚 Continue Learning</h4>
+
+            <p class="text-muted">
+                Continue your programming journey by completing the next lesson.
+            </p>
+
+            <a href="{{ url_for('lessons') }}"
+               class="btn btn-primary">
+
+                Go to Lessons
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Learning Arena -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow p-4 h-100">
+
+            <h4>🎮 Learning Arena</h4>
+
+            <p class="text-muted">
+                Practice coding questions from HackerRank and LeetCode based on each lesson.
+            </p>
+
+            <a href="{{ url_for('arena') }}"
+               class="btn btn-success">
+
+                Start Practicing
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Leaderboard -->
+
+    <div class="col-md-4">
+
+        <div class="card shadow p-4 h-100">
+
+            <h4>🏆 Leaderboard</h4>
+
+            <p class="text-muted">
+                Compare your progress with other learners.
+            </p>
+
+            <a href="{{ url_for('leaderboard') }}"
+               class="btn btn-warning">
+
+                View Leaderboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

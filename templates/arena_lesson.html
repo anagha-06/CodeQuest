@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }} Practice{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        🎮 {{ lesson.title }} Practice
+    </h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle text-center">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>#</th>
+                        <th>Problem</th>
+                        <th>Difficulty</th>
+                        <th>Platform</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for question in questions %}
+
+                    <tr>
+
+                        <td>{{ loop.index }}</td>
+
+                        <td class="text-start">
+                            {{ question.title }}
+                        </td>
+
+                        <td>
+
+                            {% if question.difficulty == "Easy" %}
+
+                                <span class="badge bg-success">
+                                    Easy
+                                </span>
+
+                            {% elif question.difficulty == "Medium" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Medium
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-danger">
+                                    Hard
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if question.platform == "HackerRank" %}
+
+                                 HackerRank
+
+                            {% else %}
+
+                                 LeetCode
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+{% if question.id in completed_questions %}
+
+    <a href="{{ question.problem_url }}"
+       target="_blank"
+       class="btn btn-success btn-sm">
+
+        Completed
+
+    </a>
+
+{% else %}
+
+    <a href="{{ question.problem_url }}"
+       target="_blank"
+       class="btn btn-primary btn-sm">
+
+        Solve
+
+    </a>
+
+    <a href="{{ url_for('practice_complete',
+                        question_id=question.id) }}"
+       class="btn btn-success btn-sm">
+
+        Mark Completed
+
+    </a>
+
+{% endif %}
+
+</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

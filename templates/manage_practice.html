@@ -1,0 +1,112 @@
+
+{% extends "base.html" %}
+
+{% block title %}Manage Practice Questions | CodeQuest{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2>Manage Practice Questions</h2>
+            <p class="text-muted">
+                Manage coding questions in the Learning Arena.
+            </p>
+        </div>
+
+        <a href="{{ url_for('add_practice') }}"
+           class="btn btn-success">
+            + Add Practice Question
+        </a>
+
+    </div>
+
+    <a href="{{ url_for('admin_dashboard') }}"
+       class="btn btn-outline-secondary mb-3">
+        Back to Dashboard
+    </a>
+
+    {% if questions %}
+
+    {% for question, lesson in questions %}
+
+    <div class="card shadow-sm mb-3">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-start">
+
+                <div>
+
+                    <span class="badge bg-primary">
+                        Lesson {{ lesson.lesson_number }}
+                    </span>
+
+                    <h5 class="mt-2">{{ question.title }}</h5>
+
+                    <p class="mb-1">
+                        Platform: {{ question.platform }}
+                    </p>
+
+                    <p class="mb-1">
+                        Difficulty:
+
+                        {% if question.difficulty == "Easy" %}
+                            <span class="badge bg-success">Easy</span>
+                        {% elif question.difficulty == "Medium" %}
+                            <span class="badge bg-warning text-dark">Medium</span>
+                        {% else %}
+                            <span class="badge bg-danger">Hard</span>
+                        {% endif %}
+
+                    </p>
+
+                    <a href="{{ question.problem_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Open Problem
+                    </a>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <a href="{{ url_for('edit_practice', question_id=question.id) }}"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <form method="POST"
+                          action="{{ url_for('delete_practice', question_id=question.id) }}"
+                          onsubmit="return confirm('Delete this practice question?');">
+
+                        <button type="submit"
+                                class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    {% else %}
+
+    <div class="alert alert-info">
+        No practice questions have been added yet.
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

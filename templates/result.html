@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz Result{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h2>🎯 Quiz Results</h2>
+
+<hr>
+
+<h3>
+
+Score: {{ score }}/{{ total }}
+
+</h3>
+
+<h1>{{ percentage }}%</h1>
+
+{% if percentage >= 80 %}
+
+<div class="alert alert-success">
+
+🎉 Congratulations! You passed!
+
+</div>
+
+{% else %}
+
+<div class="alert alert-danger">
+
+You need at least 80% to unlock the next lesson.
+
+</div>
+
+{% endif %}
+
+</div>
+
+<br>
+
+{% for result in results %}
+
+<div class="card shadow-sm mb-3">
+
+<div class="card-body">
+
+<h5>{{ loop.index }}. {{ result.question }}</h5>
+
+{% if result.correct %}
+
+<p class="text-success">✅ Correct</p>
+
+{% else %}
+
+<p class="text-danger">❌ Incorrect</p>
+
+{% endif %}
+
+<p><strong>Explanation:</strong> {{ result.explanation }}</p>
+
+</div>
+
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<hr class="my-4">
+
+<div class="text-center">
+
+    {% if percentage >= 80 %}
+
+        <div class="alert alert-success">
+            🎉 Congratulations! You unlocked the next lesson.
+        </div>
+
+        {% if lesson.lesson_number < 3 %}
+        <a href="{{ url_for('lesson', lesson_id=lesson.id + 1) }}"
+           class="btn btn-success btn-lg">
+            ➡ Continue to Next Lesson
+        </a>
+        {% endif %}
+
+    {% else %}
+
+        <div class="alert alert-warning">
+            You need at least <strong>80%</strong> to unlock the next lesson.
+        </div>
+
+        <a href="{{ url_for('quiz', lesson_id=lesson.id) }}"
+           class="btn btn-danger">
+            🔄 Retake Quiz
+        </a>
+
+        <a href="{{ url_for('lesson', lesson_id=lesson.id) }}"
+           class="btn btn-secondary">
+            📖 Review Lesson
+        </a>
+
+    {% endif %}
+
+    <br><br>
+
+    <a href="{{ url_for('lessons') }}"
+       class="btn btn-primary">
+        📚 Back to Lessons
+    </a>
+
+    <a href="{{ url_for('dashboard') }}"
+       class="btn btn-dark">
+        🏠 Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

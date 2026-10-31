@@ -1,0 +1,67 @@
+ 
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Registered Students</h2>
+
+    <a href="{{ url_for('admin_dashboard') }}"
+       class="btn btn-secondary mb-3">
+        Back to Dashboard
+    </a>
+
+    {% if student_data %}
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Points</th>
+                    <th>Current Streak</th>
+                    <th>Highest Streak</th>
+                    <th>Lessons Completed</th>
+                    <th>Practice Completed</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for data in student_data %}
+
+                <tr>
+                    <td>{{ data.student.username }}</td>
+                    <td>{{ data.student.email }}</td>
+                    <td>{{ data.student.points }}</td>
+                    <td>{{ data.student.current_streak }}</td>
+                    <td>{{ data.student.highest_streak }}</td>
+
+                    <td>
+                        {{ data.completed_lessons }} / {{ total_lessons }}
+                    </td>
+
+                    <td>{{ data.completed_practice }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            No students have registered yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

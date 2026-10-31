@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ lesson.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h1>
+
+{{ lesson.title }}
+
+</h1>
+
+<hr>
+
+<p>
+
+{{ lesson.content }}
+
+</p>
+
+<a href="{{ url_for('quiz', lesson_id=lesson.id) }}"
+   class="btn btn-success">
+    📝 Take Quiz
+</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Add Practice Question | CodeQuest{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2>Add Practice Question</h2>
+    <p class="text-muted">Add a coding problem to the Learning Arena.</p>
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Select Lesson</label>
+
+            <select name="lesson_id" class="form-select" required>
+                <option value="">Choose a lesson</option>
+
+                {% for lesson in lessons %}
+                <option value="{{ lesson.id }}">
+                    Lesson {{ lesson.lesson_number }} - {{ lesson.title }}
+                </option>
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Question Title</label>
+            <input type="text"
+                   name="title"
+                   class="form-control"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Difficulty</label>
+
+            <select name="difficulty" class="form-select" required>
+                <option value="">Select Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Platform</label>
+
+            <select name="platform" class="form-select" required>
+                <option value="">Select Platform</option>
+                <option value="LeetCode">LeetCode</option>
+                <option value="HackerRank">HackerRank</option>
+                <option value="CodeChef">CodeChef</option>
+                <option value="GeeksforGeeks">GeeksforGeeks</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Problem URL</label>
+            <input type="url"
+                   name="problem_url"
+                   class="form-control"
+                   placeholder="https://..."
+                   required>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Add Question
+        </button>
+
+        <a href="{{ url_for('manage_practice') }}"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Lessons{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        📚 C Programming Course
+    </h2>
+
+    <div class="row">
+
+        {% for lesson in lessons %}
+
+        {% set unlocked = false %}
+
+        {% if lesson.lesson_number == 1 %}
+            {% set unlocked = true %}
+        {% elif (lesson.id - 1) in completed_lessons %}
+            {% set unlocked = true %}
+        {% endif %}
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body">
+
+                    <h4>{{ lesson.title }}</h4>
+
+                    <p>{{ lesson.description }}</p>
+
+                    {% if lesson.id in completed_lessons %}
+
+                        <span class="badge bg-success mb-3">
+                            ✅ Completed
+                        </span>
+
+                    {% elif unlocked %}
+
+                        <span class="badge bg-primary mb-3">
+                            🔓 Available
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary mb-3">
+                            🔒 Locked
+                        </span>
+
+                    {% endif %}
+
+                    <br>
+
+                    {% if unlocked %}
+
+                        <a href="{{ url_for('lesson', lesson_id=lesson.id) }}"
+                           class="btn btn-primary">
+
+                            Open Lesson
+
+                        </a>
+
+                    {% else %}
+
+                        <button
+                            class="btn btn-secondary"
+                            disabled>
+
+                            Locked
+
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

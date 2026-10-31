@@ -1,0 +1,186 @@
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#f5f7fb;
+
+}
+
+.hero{
+
+    background:linear-gradient(135deg,#4F46E5,#7C3AED);
+
+    color:white;
+
+    padding:120px 20px;
+
+}
+
+.hero h1{
+
+    font-weight:700;
+
+}
+
+.feature-card{
+
+    border:none;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.btn-warning{
+
+    border-radius:30px;
+
+    padding:12px 30px;
+
+}
+
+.card{
+
+    border-radius:20px;
+
+}
+
+/* ========================= */
+/* Leaderboard               */
+/* ========================= */
+
+.leaderboard-title{
+
+    text-align:center;
+    font-weight:700;
+    color:#1e3a8a;
+    margin-bottom:30px;
+
+}
+
+.leaderboard-card{
+
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+
+}
+
+.leaderboard-table thead{
+
+    background:linear-gradient(90deg,#2563eb,#1e40af);
+    color:white;
+
+}
+
+.leaderboard-table thead th{
+
+    padding:18px;
+    font-size:18px;
+    border:none;
+
+}
+
+.leaderboard-table tbody td{
+
+    padding:16px;
+    vertical-align:middle;
+    border-color:#f0f0f0;
+
+}
+
+.leaderboard-table tbody tr{
+
+    transition:0.25s ease;
+
+}
+
+.leaderboard-table tbody tr:hover{
+
+    transform:scale(1.01);
+    background:#f8fbff;
+
+}
+
+/* ---------- Top 3 ---------- */
+
+.gold-row{
+
+    background:#FFF8E1;
+
+}
+
+.silver-row{
+
+    background:#F3F4F6;
+
+}
+
+.bronze-row{
+
+    background:#FCE8D5;
+
+}
+
+.gold-row td,
+.silver-row td,
+.bronze-row td{
+
+    font-weight:700;
+
+}
+
+/* Current User */
+
+.you-row{
+
+    background:#E8F5E9;
+
+    border-left:5px solid #22C55E;
+
+}
+
+/* You Badge */
+
+.you-badge{
+
+    background:#10B981;
+
+    color:white;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    margin-left:8px;
+
+}
+
+/* Medal Icons */
+
+.gold-medal{
+
+    font-size:28px;
+
+}
+
+.silver-medal{
+
+    font-size:26px;
+
+}
+
+.bronze-medal{
+
+    font-size:26px;
+
+}

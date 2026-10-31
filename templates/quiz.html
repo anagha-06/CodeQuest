@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }} Quiz{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-center">
+            📝 {{ lesson.title }}
+        </h2>
+
+        <hr>
+
+        <!-- Progress -->
+
+        <div class="progress mb-4" style="height:25px;">
+
+            <div id="progressBar"
+                 class="progress-bar progress-bar-striped progress-bar-animated"
+                 style="width:0%;">
+
+                0%
+
+            </div>
+
+        </div>
+
+        <form method="POST" id="quizForm">
+
+            {% for question in questions %}
+
+            <div class="question-page {% if not loop.first %}d-none{% endif %}">
+
+                <h5 class="mb-3">
+
+                    Question {{ loop.index }} of {{ questions|length }}
+
+                </h5>
+
+                <h4>
+
+                    {{ question.question }}
+
+                </h4>
+
+                <br>
+
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="radio"
+                           name="question{{ question.id }}"
+                           value="A"
+                           required>
+
+                    <label class="form-check-label">
+
+                        {{ question.option_a }}
+
+                    </label>
+
+                </div>
+
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="radio"
+                           name="question{{ question.id }}"
+                           value="B">
+
+                    <label class="form-check-label">
+
+                        {{ question.option_b }}
+
+                    </label>
+
+                </div>
+
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="radio"
+                           name="question{{ question.id }}"
+                           value="C">
+
+                    <label class="form-check-label">
+
+                        {{ question.option_c }}
+
+                    </label>
+
+                </div>
+
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="radio"
+                           name="question{{ question.id }}"
+                           value="D">
+
+                    <label class="form-check-label">
+
+                        {{ question.option_d }}
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+            <div class="mt-4 d-flex justify-content-between">
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        id="prevBtn">
+
+                    ← Previous
+
+                </button>
+
+                <button type="button"
+                        class="btn btn-primary"
+                        id="nextBtn">
+
+                    Next →
+
+                </button>
+
+                <button type="submit"
+                        class="btn btn-success d-none"
+                        id="submitBtn">
+
+                    Submit Quiz
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+const pages = document.querySelectorAll(".question-page");
+
+let current = 0;
+
+const progressBar = document.getElementById("progressBar");
+
+const prevBtn = document.getElementById("prevBtn");
+
+const nextBtn = document.getElementById("nextBtn");
+
+const submitBtn = document.getElementById("submitBtn");
+
+function updateQuiz(){
+
+    pages.forEach((page,index)=>{
+
+        page.classList.toggle("d-none",index!==current);
+
+    });
+
+    let percent=((current+1)/pages.length)*100;
+
+    progressBar.style.width=percent+"%";
+
+    progressBar.innerHTML=Math.round(percent)+"%";
+
+    prevBtn.style.display=current===0?"none":"inline-block";
+
+    if(current===pages.length-1){
+
+        nextBtn.classList.add("d-none");
+
+        submitBtn.classList.remove("d-none");
+
+    }
+
+    else{
+
+        nextBtn.classList.remove("d-none");
+
+        submitBtn.classList.add("d-none");
+
+    }
+
+}
+
+nextBtn.addEventListener("click",()=>{
+
+    const radios = pages[current].querySelectorAll("input[type=radio]");
+
+    let answered = false;
+
+    radios.forEach(r=>{
+
+        if(r.checked)
+
+            answered=true;
+
+    });
+
+    if(!answered){
+
+        alert("Please select an answer.");
+
+        return;
+
+    }
+
+    current++;
+
+    updateQuiz();
+
+});
+
+prevBtn.addEventListener("click",()=>{
+
+    current--;
+
+    updateQuiz();
+
+});
+
+updateQuiz();
+
+</script>
+
+{% endblock %}

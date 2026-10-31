@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h1 class="leaderboard-title">
+        🏆 Leaderboard
+    </h1>
+
+    <div class="card shadow leaderboard-card">
+
+        <div class="card-body p-0">
+
+            <table class="table leaderboard-table text-center align-middle mb-0">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>XP</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for user in users %}
+
+                    <tr
+
+                    {% if loop.index == 1 %}
+                        class="gold-row"
+
+                    {% elif loop.index == 2 %}
+                        class="silver-row"
+
+                    {% elif loop.index == 3 %}
+                        class="bronze-row"
+
+                    {% elif user.id == current_user.id %}
+                        class="you-row"
+
+                    {% endif %}
+
+                    >
+
+                        <td>
+
+                            {% if loop.index == 1 %}
+
+                                <span class="gold-medal">🥇</span>
+
+                            {% elif loop.index == 2 %}
+
+                                <span class="silver-medal">🥈</span>
+
+                            {% elif loop.index == 3 %}
+
+                                <span class="bronze-medal">🥉</span>
+
+                            {% else %}
+
+                                <strong>#{{ loop.index }}</strong>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <strong>{{ user.username }}</strong>
+
+                            {% if user.id == current_user.id %}
+
+                                <span class="you-badge">
+
+                                    You
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <span class="xp-badge">
+
+                                ⭐ {{ user.points }} XP
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

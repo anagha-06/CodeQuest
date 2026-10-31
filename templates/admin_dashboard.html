@@ -1,0 +1,135 @@
+
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | CodeQuest{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Admin Dashboard</h2>
+            <p class="text-muted">Welcome to CodeQuest Administration Panel</p>
+        </div>
+
+        <a href="{{ url_for('admin_logout') }}"
+           class="btn btn-danger">
+            Logout
+        </a>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Students</h6>
+                    <h2 class="text-primary">{{ total_users }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Lessons</h6>
+                    <h2 class="text-success">{{ total_lessons }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Quiz Questions</h6>
+                    <h2 class="text-warning">{{ total_quiz_questions }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Practice Questions</h6>
+                    <h2 class="text-danger">{{ total_practice_questions }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Management Section -->
+    <div class="mt-5">
+
+        <h4 class="mb-3">Content Management</h4>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5>Manage Lessons</h5>
+                        <p class="text-muted">
+                            Add, edit and delete course lessons.
+                        </p>
+                        <a href="{{ url_for('manage_lessons') }}"
+                           class="btn btn-primary">
+                            Manage Lessons
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5>Manage Quiz Questions</h5>
+                        <p class="text-muted">
+                            Add, edit and delete lesson quiz questions.
+                        </p>
+                        <a href="{{ url_for('manage_questions') }}"
+                           class="btn btn-primary">
+                            Manage Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5>Manage Practice Questions</h5>
+                        <p class="text-muted">
+                            Manage Learning Arena questions.
+                        </p>
+                        <a href="{{ url_for('manage_practice') }}"
+                           class="btn btn-primary">
+                            Manage Practice
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5>View Students</h5>
+                        <p class="text-muted">
+                            View registered students and their progress.
+                        </p>
+                        <a href="{{ url_for('view_students') }}"
+                           class="btn btn-primary">
+                            View Students
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
